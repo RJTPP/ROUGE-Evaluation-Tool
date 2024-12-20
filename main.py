@@ -15,40 +15,48 @@ def check_dataset_file():
 
 def main():
     # Read dataset
+    print("Reading dataset...")
     datasets = read_json(os.path.join("data", "dataset.json"))
 
     scores = []
 
+    print("Calculating ROUGE scores...")
     for dataset in datasets:
         reference = dataset["reference"]
         candidates_list = dataset["candidate"]
+        try:
 
-        for candidate in candidates_list:
-            rouge1_score = rouge1(candidate, reference)
-            rouge2_score = rouge2(candidate, reference)
-            rouge_l_score = rouge_l(candidate, reference)
+            for candidate in candidates_list:
+                rouge1_score = rouge1(candidate, reference)
+                rouge2_score = rouge2(candidate, reference)
+                rouge_l_score = rouge_l(candidate, reference)
 
-            scores.append({
-                "candidate": candidate,
-                "reference": reference,
-                "ROUGE-1": {
-                    "precision": rouge1_score[0],
-                    "recall": rouge1_score[1],
-                    "f-measure": rouge1_score[2]
-                },
-                "ROUGE-2": {
-                    "precision": rouge2_score[0],
-                    "recall": rouge2_score[1],
-                    "f-measure": rouge2_score[2]
-                },
-                "ROUGE-L": {
-                    "precision": rouge_l_score[0],
-                    "recall": rouge_l_score[1],
-                    "f-measure": rouge_l_score[2]
-                }
-            })
+                scores.append({
+                    "candidate": candidate,
+                    "reference": reference,
+                    "ROUGE-1": {
+                        "precision": rouge1_score[0],
+                        "recall": rouge1_score[1],
+                        "f-measure": rouge1_score[2]
+                    },
+                    "ROUGE-2": {
+                        "precision": rouge2_score[0],
+                        "recall": rouge2_score[1],
+                        "f-measure": rouge2_score[2]
+                    },
+                    "ROUGE-L": {
+                        "precision": rouge_l_score[0],
+                        "recall": rouge_l_score[1],
+                        "f-measure": rouge_l_score[2]
+                    }
+                })
+        except Exception as e:
+            print(f"Error processing candidate: {candidate}")
+            print(f"Error processing dataset: {e}")
     
+    print("Saving ROUGE scores...")
     write_json(os.path.join("data", "scores.json"), scores, indent=True)
+    print("ROUGE scores saved to data/scores.json")
 
 
 if __name__ == "__main__":
