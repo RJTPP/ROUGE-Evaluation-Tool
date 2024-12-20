@@ -1,0 +1,16 @@
+[
+    {
+        "reference" : "a fast brown dog jumps over a sleeping fox",
+        "candidate" : [
+            "fast brown fox leaps over a sleeping dog",
+            "the quick brown fox jumps over the lazy dog"
+        ]
+    },
+    {
+        "reference" : "a quick brown dog jumps over the fox",
+        "candidate" : [
+            "fast brown fox leaps over a sleeping dog",
+            "the quick brown fox jumps over the lazy dog"
+        ]
+    }
+]
