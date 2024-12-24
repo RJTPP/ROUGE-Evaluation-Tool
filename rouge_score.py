@@ -124,27 +124,3 @@ def rouge_l(candidate_text: str, reference_text: str) -> Tuple[Union[int, float]
     len_lcs = len(find_longest_common_subsequence(candidate_text, reference_text))
 
     return rouge_calculation(len_lcs, len_cndt, len_ref)
-
-
-if __name__ == "__main__":
-    cndt_text = "the quick brown fox jumps over the lazy dog"
-    ref_text = "a fast brown dog jumps over a sleeping fox"
-
-    rouge1_score = rouge1(cndt_text, ref_text)
-    rouge2_score = rouge2(cndt_text, ref_text)
-    rouge_l_score = rouge_l(cndt_text, ref_text)
-
-    print(f"ROUGE-1:")  # 0.556
-    print(f"  Precision: {rouge1_score[0]: .4f}")
-    print(f"  Recall   : {rouge1_score[1]: .4f}")
-    print(f"  F-Measure: {rouge1_score[2]: .4f}")
-
-    print(f"ROUGE-2:")  # 0.125
-    print(f"  Precision: {rouge2_score[0]: .4f}")
-    print(f"  Recall   : {rouge2_score[1]: .4f}")
-    print(f"  F-Measure: {rouge2_score[2]: .4f}")
-
-    print(f"ROUGE-L:")  # 0.333
-    print(f"  Precision: {rouge_l_score[0]: .4f}")
-    print(f"  Recall   : {rouge_l_score[1]: .4f}")
-    print(f"  F-Measure: {rouge_l_score[2]: .4f}")
