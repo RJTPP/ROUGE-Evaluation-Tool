@@ -33,7 +33,7 @@ This project was developed using Python 3.6 and is tested to be compatible with 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/RJTPP/ROUGE-Evaluation-Tool.git
+git clone https://github.com/RJTPP/ROUGE-Evaluation-Tool.git && 
 cd ROUGE-Evaluation-Tool
 ```
 
