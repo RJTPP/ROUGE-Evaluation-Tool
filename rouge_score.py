@@ -1,4 +1,4 @@
-from typing import Union, Tuple, List
+from typing import Union, Tuple, List, Iterable
 
 
 # MARK: helper functions
@@ -51,6 +51,20 @@ def find_longest_common_subsequence(text1: str, text2: str) -> List[str]:
     lcs.reverse()
     return lcs
 
+
+def get_overlap(candidate_list: Iterable, reference_list: Iterable) -> int:
+    candidate_set = set(candidate_list)
+    reference_set = set(reference_list)
+
+    overlap_list = None
+    if len(candidate_list) < len(reference_list):
+        overlap_list = [word for word in candidate_list if word in reference_set]
+    else:
+        overlap_list = [word for word in reference_list if word in candidate_set]
+
+    return overlap_list
+
+
 # MARK: Score Calculation
 
 def precision_calculation(overlap_count: int, candidate_count: int) -> Union[int, float]:
@@ -94,11 +108,8 @@ def rouge1(candidate_text: str, reference_text: str) -> Tuple[Union[int, float]]
 
     len_cndt = len(candidate_text)
     len_ref = len(reference_text)
-
-    candidate_text = set(candidate_text)
-    reference_text = set(reference_text)
-
-    overlap_count = len(candidate_text.intersection(reference_text))
+    
+    overlap_count = len(get_overlap(candidate_text, reference_text))
 
     return rouge_calculation(overlap_count, len_cndt, len_ref)
 
@@ -109,11 +120,8 @@ def rouge2(candidate_text: str, reference_text: str) -> Tuple[Union[int, float]]
 
     len_cndt = len(candidate_bigrams)
     len_ref = len(reference_bigrams)
-
-    candidate_bigrams = set(candidate_bigrams)
-    reference_bigrams = set(reference_bigrams)
     
-    overlap_count = len(candidate_bigrams.intersection(reference_bigrams))
+    overlap_count = len(get_overlap(candidate_bigrams, reference_bigrams))
 
     return rouge_calculation(overlap_count, len_cndt, len_ref)
 
@@ -124,3 +132,4 @@ def rouge_l(candidate_text: str, reference_text: str) -> Tuple[Union[int, float]
     len_lcs = len(find_longest_common_subsequence(candidate_text, reference_text))
 
     return rouge_calculation(len_lcs, len_cndt, len_ref)
+
