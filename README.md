@@ -1,5 +1,8 @@
 # ROUGE Evaluation Tool
 
+[![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This project provides a Python implementation to calculate **ROUGE** (Recall-Oriented Understudy for Gisting Evaluation) scores. It includes methods for computing ROUGE-1, ROUGE-2, and ROUGE-L metrics, which are commonly used to evaluate text similarity and summarization performance.
 
 
